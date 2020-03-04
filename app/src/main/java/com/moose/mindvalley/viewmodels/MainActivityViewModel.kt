@@ -24,9 +24,8 @@ class MainActivityViewModel(application: Application): AndroidViewModel(applicat
 
     init {
         val dao = AppDatabase.getDatabase(application.applicationContext).dao()
-        Log.d("room_instance", AppDatabase.getDatabase(application).toString())
         mindvalleyRepository = MindvalleyRepository(dao)
-        episodes = mindvalleyRepository.episodes
+        episodes = mindvalleyRepository.getEpisodes()
     }
 
     //Get the Latest episodes

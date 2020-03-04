@@ -17,14 +17,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         viewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
         viewModel.episodes.observe(this, Observer {
-            if (it != null){
-                Log.d("room_", "$it")
-            }
-            else{
-                viewModel.getEpisodes()
-                viewModel.getChannels()
-                viewModel.getCategories()
-            }
+            Log.d("room_", "$it")
         })
+        viewModel.getEpisodes()
+        viewModel.getChannels()
+        viewModel.getCategories()
     }
 }

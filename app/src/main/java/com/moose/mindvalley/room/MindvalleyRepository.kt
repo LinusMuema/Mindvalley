@@ -8,7 +8,11 @@ import com.moose.mindvalley.models.DbEpisodes
 
 class MindvalleyRepository(private val dao: MindvalleyDao){
 
-    val episodes: LiveData<DbEpisodes> = dao.getEpisodes()
+    fun getEpisodes(): LiveData<DbEpisodes>{
+        val episodeLiveData = dao.getEpisodes()
+        Log.d("room_", "${episodeLiveData.value}")
+        return episodeLiveData
+    }
 
     fun updateCategories(categories: DbCategories) {
         dao.insertCategories(categories)
