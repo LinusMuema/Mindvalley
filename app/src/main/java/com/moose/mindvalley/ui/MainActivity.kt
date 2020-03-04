@@ -2,9 +2,12 @@ package com.moose.mindvalley.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
+import androidx.room.Room
 import com.moose.mindvalley.R
+import com.moose.mindvalley.room.AppDatabase
 import com.moose.mindvalley.viewmodels.MainActivityViewModel
 
 class MainActivity : AppCompatActivity() {
@@ -12,13 +15,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        viewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(application).create(MainActivityViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
         viewModel.getEpisodes()
-//        viewModel.getChannels()
-//        viewModel.getCategories()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
+        viewModel.getChannels()
+        viewModel.getCategories()
+        viewModel.categories.observe(this, Observer {
+            Log.d("viewmodel_", "$it")
+        })
     }
 }

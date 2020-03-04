@@ -1,5 +1,8 @@
 package com.moose.mindvalley.models
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
 data class Channels(
     val `data`: ChannelsData
 )
@@ -44,4 +47,11 @@ data class Sery(
 
 data class CoverAssetXX(
     val url: String
+)
+
+@Entity(tableName = "db_channels")
+data class DbChannels(
+    @PrimaryKey(autoGenerate = true)
+    val id: Int,
+    val channels: String
 )

@@ -1,6 +1,9 @@
 package com.moose.mindvalley.models
 
-data class NewEpisodes(
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+data class Episodes(
     val `data`: EpisodesData
 )
 
@@ -21,4 +24,11 @@ data class EpisodesChannel(
 
 data class EpisodesCoverAsset(
     val url: String
+)
+
+@Entity(tableName = "db_episodes")
+data class DbEpisodes(
+    @PrimaryKey(autoGenerate = true)
+    val id: Int,
+    val episodes: String
 )
