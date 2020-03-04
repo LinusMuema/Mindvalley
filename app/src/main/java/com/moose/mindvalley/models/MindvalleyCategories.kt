@@ -1,5 +1,6 @@
 package com.moose.mindvalley.models
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
@@ -15,9 +16,8 @@ data class Category(
     val name: String
 )
 
-@Entity(tableName = "db_categories")
+@Entity
 data class DbCategories(
-    @PrimaryKey(autoGenerate = true)
-    val id: Int,
+    @PrimaryKey val id: Int,
     val categories: String
 )

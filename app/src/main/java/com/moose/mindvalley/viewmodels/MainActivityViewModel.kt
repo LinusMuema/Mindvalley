@@ -1,6 +1,7 @@
 package com.moose.mindvalley.viewmodels
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
@@ -18,14 +19,16 @@ import org.jsoup.Jsoup
 
 class MainActivityViewModel(application: Application): AndroidViewModel(application) {
     private val compositeDisposable = CompositeDisposable()
-    var categories: LiveData<DbCategories>
     private var mindvalleyRepository: MindvalleyRepository
+    val episodes: LiveData<DbEpisodes>
 
     init {
-        val dao = AppDatabase.getDatabase(application).dao()
+        val dao = AppDatabase.getDatabase(application.applicationContext).dao()
+        Log.d("room_instance", AppDatabase.getDatabase(application).toString())
         mindvalleyRepository = MindvalleyRepository(dao)
-        categories = mindvalleyRepository.dbCategories
+        episodes = mindvalleyRepository.episodes
     }
+
     //Get the Latest episodes
     fun getEpisodes() {
         compositeDisposable.add(ServiceBuilder.buildService().getEpisodes()

@@ -10,17 +10,17 @@ import com.moose.mindvalley.models.*
 @Dao
 interface MindvalleyDao {
 
-    @Query("SELECT * FROM db_episodes")
+    @Query("SELECT * FROM DbEpisodes")
     fun getEpisodes(): LiveData<DbEpisodes>
 
-    @Query("SELECT * FROM db_channels")
+    @Query("SELECT * FROM DbChannels")
     fun getChannels(): LiveData<DbChannels>
 
-    @Query("SELECT * FROM db_categories")
+    @Query("SELECT * FROM DbCategories")
     fun getCategories(): LiveData<DbCategories>
 
     @Insert(onConflict = REPLACE)
-    fun insertEpisodes(episodes: DbEpisodes)
+    fun insertEpisodes(episodes: DbEpisodes): Long
 
     @Insert(onConflict = REPLACE)
     fun insertChannels(channels: DbChannels)

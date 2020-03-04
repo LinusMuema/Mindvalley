@@ -4,30 +4,21 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.moose.mindvalley.models.*
+import com.moose.mindvalley.models.DbCategories
+import com.moose.mindvalley.models.DbChannels
+import com.moose.mindvalley.models.DbEpisodes
 
 
 @Database (entities = [DbEpisodes::class, DbCategories::class, DbChannels::class], version = 1)
 abstract class AppDatabase: RoomDatabase(){
     abstract fun dao(): MindvalleyDao
-    companion object {
-        @Volatile
-        private var INSTANCE: AppDatabase? = null
-
+    companion object{
+        private var instance: AppDatabase? = null
         fun getDatabase(context: Context): AppDatabase {
-            val tempInstance = INSTANCE
-            if (tempInstance != null) {
-                return tempInstance
+            if (instance == null){
+                instance = Room.databaseBuilder(context.applicationContext, AppDatabase::class.java, "mindvalley.db").build()
             }
-            synchronized(this) {
-                val instance = Room.databaseBuilder(
-                    context.applicationContext,
-                    AppDatabase::class.java,
-                    "Mindvalley"
-                ).build()
-                INSTANCE = instance
-                return instance
-            }
+            return instance!!
         }
     }
 }

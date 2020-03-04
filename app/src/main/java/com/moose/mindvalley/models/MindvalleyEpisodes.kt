@@ -1,5 +1,6 @@
 package com.moose.mindvalley.models
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
@@ -26,9 +27,8 @@ data class EpisodesCoverAsset(
     val url: String
 )
 
-@Entity(tableName = "db_episodes")
+@Entity
 data class DbEpisodes(
-    @PrimaryKey(autoGenerate = true)
-    val id: Int,
+    @PrimaryKey val id: Int,
     val episodes: String
 )
