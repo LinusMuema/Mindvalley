@@ -65,4 +65,10 @@ class MainActivityViewModel: ViewModel() {
                 val categories = Gson().fromJson(json, Categories::class.java)
             },{}))
     }
+
+    override fun onCleared() {
+        super.onCleared()
+        //Dispose the composite to avoid memory leaks
+        compositeDisposable.dispose()
+    }
 }

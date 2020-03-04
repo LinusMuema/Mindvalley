@@ -12,4 +12,5 @@ class RetrofitUnitTests {
     private lateinit var episodes: NewEpisodes
     private lateinit var categories: Categories
 
+
 }
