@@ -7,6 +7,7 @@ import com.moose.mindvalley.models.DbEpisodes
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import org.koin.core.definition.BeanDefinition
 
 class MindvalleyRepository(private val dao: MindvalleyDao, private val compositeDisposable: CompositeDisposable){
 
@@ -16,7 +17,6 @@ class MindvalleyRepository(private val dao: MindvalleyDao, private val composite
             .subscribeOn(Schedulers.computation())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                Log.d("room_", "Database insertion success")
                 getEpisodes()
             }, {}))
     }
