@@ -20,6 +20,15 @@ class MainActivityViewModel(
     val channels = repository.channels
     val categories = repository.categories
 
+    //Get episodes from DB
+    fun getEpisodes(){ repository.getEpisodes() }
+
+    //Get channels from DB
+    fun getChannels(){ repository.getChannels() }
+
+    //Get categories from DB
+    fun getCategories(){ repository.getCategories() }
+
     //Get the Latest episodes form api
     fun getNetworkEpisodes() {
         compositeDisposable.add(retrofit.getEpisodes()
