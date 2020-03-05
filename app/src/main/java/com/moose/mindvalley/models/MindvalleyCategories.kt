@@ -16,8 +16,8 @@ data class Category(
     val name: String
 )
 
-@Entity
-data class DbCategories(
+@Entity(tableName = "db_categories")
+class DbCategories(
     @PrimaryKey val id: Int,
     val categories: String
 )

@@ -50,8 +50,8 @@ data class CoverAssetXX(
     val url: String
 )
 
-@Entity
-data class DbChannels(
+@Entity(tableName = "db_channels")
+class DbChannels(
     @PrimaryKey val id: Int,
     val channels: String
 )

@@ -3,13 +3,9 @@ package com.moose.mindvalley.viewmodels
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
 import com.moose.mindvalley.models.*
 import com.moose.mindvalley.network.ServiceBuilder
 import com.moose.mindvalley.room.AppDatabase
-import com.moose.mindvalley.room.MindvalleyDao
 import com.moose.mindvalley.room.MindvalleyRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -19,48 +15,46 @@ import org.jsoup.Jsoup
 
 class MainActivityViewModel(application: Application): AndroidViewModel(application) {
     private val compositeDisposable = CompositeDisposable()
+    private var  appDatabase: AppDatabase = AppDatabase.getInstance(application)
     private var mindvalleyRepository: MindvalleyRepository
-    val episodes: LiveData<DbEpisodes>
 
     init {
-        val dao = AppDatabase.getDatabase(application.applicationContext).dao()
-        mindvalleyRepository = MindvalleyRepository(dao)
-        episodes = mindvalleyRepository.getEpisodes()
+        mindvalleyRepository = MindvalleyRepository(appDatabase.dao(), compositeDisposable)
     }
-
     //Get the Latest episodes
-    fun getEpisodes() {
+    fun getNetworkEpisodes() {
         compositeDisposable.add(ServiceBuilder.buildService().getEpisodes()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
+                Log.d("room_", "Netwrok retrieval success")
                 val json = Jsoup.parse(it.string()).select("textarea").text()
                 val dbEpisodes = DbEpisodes(0, json)
-                mindvalleyRepository.updateEpisodes(dbEpisodes)
+                mindvalleyRepository.saveEpisodes(dbEpisodes)
             },{}))
     }
 
     //Get available channels
-    fun getChannels() {
+    fun getNetworkChannels() {
         compositeDisposable.add(ServiceBuilder.buildService().getChannels()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 val json = Jsoup.parse(it.string()).select("textarea").text()
                 val dbChannels = DbChannels(0, json)
-                mindvalleyRepository.updateChannels(dbChannels)
+                mindvalleyRepository.saveChannels(dbChannels)
             },{}))
     }
 
     //Get all categories
-    fun getCategories() {
+    fun getNetworkCategories() {
         compositeDisposable.add(ServiceBuilder.buildService().getCategories()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 val json = Jsoup.parse(it.string()).select("textarea").text()
                 val dbCategories = DbCategories(0, json)
-                mindvalleyRepository.updateCategories(dbCategories)
+                mindvalleyRepository.saveCategories(dbCategories)
             },{}))
     }
 

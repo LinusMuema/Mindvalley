@@ -12,13 +12,20 @@ import com.moose.mindvalley.models.DbEpisodes
 @Database (entities = [DbEpisodes::class, DbCategories::class, DbChannels::class], version = 1)
 abstract class AppDatabase: RoomDatabase(){
     abstract fun dao(): MindvalleyDao
-    companion object{
-        private var instance: AppDatabase? = null
-        fun getDatabase(context: Context): AppDatabase {
-            if (instance == null){
-                instance = Room.databaseBuilder(context.applicationContext, AppDatabase::class.java, "mindvalley.db").build()
+    companion object {
+        @Volatile
+        private var INSTANCE: AppDatabase? = null
+
+        fun getInstance(context: Context): AppDatabase =
+            INSTANCE ?: synchronized(this) { INSTANCE ?: buildDatabase(context).also {
+                INSTANCE = it }
             }
-            return instance!!
-        }
+
+        private fun buildDatabase(context: Context) =
+            Room.databaseBuilder(
+                context.applicationContext,
+                AppDatabase::class.java, "Mindvalley.db"
+            )
+                .build()
     }
 }

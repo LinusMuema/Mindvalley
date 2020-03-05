@@ -27,8 +27,8 @@ data class EpisodesCoverAsset(
     val url: String
 )
 
-@Entity
-data class DbEpisodes(
+@Entity(tableName = "db_episodes")
+class DbEpisodes(
     @PrimaryKey val id: Int,
     val episodes: String
 )
