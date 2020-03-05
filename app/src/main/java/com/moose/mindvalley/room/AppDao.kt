@@ -9,7 +9,7 @@ import io.reactivex.Completable
 import io.reactivex.Flowable
 
 @Dao
-interface MindvalleyDao {
+interface AppDao {
 
     @Query("SELECT * FROM db_episodes")
     fun getEpisodes(): Flowable<List<DbEpisodes>>
