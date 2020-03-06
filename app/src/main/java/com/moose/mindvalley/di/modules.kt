@@ -3,6 +3,7 @@ package com.moose.mindvalley.di
 import android.app.Application
 import androidx.room.Room
 import com.moose.mindvalley.network.MindvalleyEndpoints
+import com.moose.mindvalley.network.ServiceBuilder
 import com.moose.mindvalley.room.AppDatabase
 import com.moose.mindvalley.room.AppRepository
 import com.moose.mindvalley.viewmodels.MainActivityViewModel
@@ -29,14 +30,7 @@ val dbModules = module {
 //Retrofit module
 val networkModules = module {
     fun getRetrofit(): MindvalleyEndpoints {
-        val interceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
-        val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
-        return Retrofit.Builder()
-            .baseUrl("https://pastebin.com/raw/")
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .client(client)
-            .build()
-            .create(MindvalleyEndpoints::class.java)
+        return ServiceBuilder.buildService()
     }
     single { getRetrofit() }
 }
