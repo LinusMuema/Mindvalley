@@ -14,7 +14,7 @@ data class ChannelsData(
 
 data class Channel(
     val coverAsset: CoverAsset,
-    val iconAsset: IconAsset,
+    var iconAsset: IconAsset? = null,
     val id: String,
     val latestMedia: List<LatestMedia>,
     val mediaCount: Int,
@@ -28,7 +28,7 @@ data class CoverAsset(
 )
 
 data class IconAsset(
-    val thumbnailUrl: String
+    var thumbnailUrl: String? = null
 )
 
 data class LatestMedia(

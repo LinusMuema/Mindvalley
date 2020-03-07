@@ -10,13 +10,13 @@
         android:id="@+id/image_shimmer"
         android:background="#000000"
         android:layout_marginBottom="10dp"
-        android:layout_width="228dp"
-        android:layout_height="228dp">
+        android:layout_width="319dp"
+        android:layout_height="172dp">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/episode_image"/>
+            android:id="@+id/series_image"/>
 
     </com.facebook.shimmer.ShimmerFrameLayout>
 
@@ -28,15 +28,7 @@
         android:textSize="17sp"
         android:lineSpacingExtra="1sp"
         android:translationY="-0.48sp"
-        android:id="@+id/episode_title"/>
+        android:id="@+id/series_title"/>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:lineSpacingExtra="0sp"
-        android:textColor="#95989D"
-        android:fontFamily="@font/gilroy_regular"
-        android:id="@+id/episode_channel"/>
 
 </LinearLayout>

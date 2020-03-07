@@ -27,7 +27,10 @@ class CategoryListAdapter(private val categories: List<Category>):
 class CategoriesViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
     private val title:TextView = itemView.findViewById(R.id.category_title)
     fun bind(category: Category) {
-        title.text = category.name
+        if (category.name.isNotEmpty())
+            title.text = category.name
+        else
+            title.text = "Category not available"
     }
 
 }

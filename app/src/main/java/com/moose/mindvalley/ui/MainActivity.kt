@@ -13,8 +13,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.gson.Gson
 import com.moose.mindvalley.R
 import com.moose.mindvalley.adapters.CategoryListAdapter
+import com.moose.mindvalley.adapters.ChannelListAdapter
 import com.moose.mindvalley.adapters.EpisodeListAdapter
 import com.moose.mindvalley.models.Categories
+import com.moose.mindvalley.models.Channels
 import com.moose.mindvalley.models.Episodes
 import com.moose.mindvalley.viewmodels.MainActivityViewModel
 import kotlinx.android.synthetic.main.activity_main.*
@@ -53,7 +55,12 @@ class MainActivity : AppCompatActivity() {
         //Observe channels LiveData
         viewModel.channels.observe(this, Observer {
             if (it.isNotEmpty()) {
-                Log.d("room_channels", it.toString())
+                val channels = Gson().fromJson(it[0].channels, Channels::class.java)
+                channels_recycler.apply {
+                    setHasFixedSize(true)
+                    layoutManager = LinearLayoutManager(this@MainActivity)
+                    adapter = ChannelListAdapter(channels.data.channels)
+                }
             }
         })
 
