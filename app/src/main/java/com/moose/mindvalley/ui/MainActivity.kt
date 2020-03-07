@@ -5,13 +5,16 @@ import android.net.ConnectivityManager
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.view.WindowManager
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.gson.Gson
 import com.moose.mindvalley.R
+import com.moose.mindvalley.adapters.CategoryListAdapter
 import com.moose.mindvalley.adapters.EpisodeListAdapter
+import com.moose.mindvalley.models.Categories
 import com.moose.mindvalley.models.Episodes
 import com.moose.mindvalley.viewmodels.MainActivityViewModel
 import kotlinx.android.synthetic.main.activity_main.*
@@ -25,10 +28,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            window.setFlags(
-                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
-                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
-            )
+            //Hide the status and navigation bars
+            window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                    or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                    or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    or View.SYSTEM_UI_FLAG_FULLSCREEN
+                    or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                    or View.SYSTEM_UI_FLAG_FULLSCREEN
+                    or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
         }
 
         //Observe episodes LiveData
@@ -53,7 +60,12 @@ class MainActivity : AppCompatActivity() {
         //Observe categories LiveData
         viewModel.categories.observe(this, Observer {
             if (it.isNotEmpty()) {
-                Log.d("room_categories", it.toString())
+                val categories = Gson().fromJson(it[0].categories, Categories::class.java)
+                categories_recycler.apply {
+                    setHasFixedSize(true)
+                    layoutManager = GridLayoutManager(this@MainActivity, 2)
+                    adapter = CategoryListAdapter(categories.data.categories)
+                }
             }
         })
 
