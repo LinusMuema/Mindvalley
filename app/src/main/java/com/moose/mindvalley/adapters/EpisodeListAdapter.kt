@@ -1,5 +1,6 @@
 package com.moose.mindvalley.adapters
 
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,10 +8,17 @@ import android.widget.ImageView
 import android.widget.Switch
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.moose.mindvalley.R
 import com.moose.mindvalley.models.Media
 import com.squareup.picasso.Callback
+import com.squareup.picasso.NetworkPolicy
 import com.squareup.picasso.Picasso
 import java.lang.Exception
 
@@ -46,14 +54,34 @@ class EpisodesViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
             channel.text = media.channel.title
         else
             channel.text = "Channel not available"
-        Picasso.get().load(media.coverAsset.url).error(R.drawable.image_error).fit().into(cover, object: Callback{
-            override fun onSuccess() {
-                shimmer.hideShimmer()
-            }
 
-            override fun onError(e: Exception?) {
-                shimmer.hideShimmer()
-            }
-        })
+        Glide.with(itemView.context)
+            .load(media.coverAsset.url)
+            .diskCacheStrategy(DiskCacheStrategy.DATA)
+            .error(R.drawable.image_error)
+            .listener(object : RequestListener<Drawable>{
+                override fun onLoadFailed(
+                    e: GlideException?,
+                    model: Any?,
+                    target: Target<Drawable>?,
+                    isFirstResource: Boolean
+                ): Boolean {
+                    shimmer.hideShimmer()
+                    return false
+                }
+
+                override fun onResourceReady(
+                    resource: Drawable?,
+                    model: Any?,
+                    target: Target<Drawable>?,
+                    dataSource: DataSource?,
+                    isFirstResource: Boolean
+                ): Boolean {
+                    shimmer.hideShimmer()
+                    return false
+                }
+
+            })
+            .into(cover)
     }
 }
