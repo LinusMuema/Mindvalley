@@ -10,7 +10,7 @@
 * [Koin](https://insert-koin.io/) : This is used to add Dependency injection in the application to simplify the code and make the application more efficient.
 * [Room](https://developer.android.com/topic/libraries/architecture/room) : This is a persistence library to introduce offline capabilities  into the app by saving data in the local device database.
 ## Challenges faced
-### 1. Resposne from the api
+### 1. Response from the api
 * The response type from the api comes in the form of text/html which I had not interacted with before, but with the help of [Jsoup](https://jsoup.org/) I was able to extract the required data and convert it to Gson format. 
 
 ### 2. Adding RxJava to Room
