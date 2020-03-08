@@ -15,7 +15,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class AndroidUnitTests {
+class DatabaseUnitTests {
     lateinit var db: AppDatabase
     lateinit var dao: AppDao
     private val context: Application = ApplicationProvider.getApplicationContext()
