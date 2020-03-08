@@ -24,7 +24,7 @@ class NetworkUnitTests{
 
     @After
     fun clear(){
-
+        observer.dispose()
     }
 
     @Test
