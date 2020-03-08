@@ -47,8 +47,8 @@ class SeriesViewHolder(itemView: View) :RecyclerView.ViewHolder(itemView){
         else
             title.text = sery.title
 
-        if (sery.coverAsset == null || sery.coverAsset.url.isNullOrEmpty()){
-            Glide.with(itemView.context).load(R.drawable.series_mage_error)
+        if (sery.coverAsset.url.isEmpty()){
+            Glide.with(itemView.context).load(R.drawable.series_mage_error).fitCenter()
                 .listener(object : RequestListener<Drawable> {
                     override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
                         shimmer.hideShimmer()
@@ -68,6 +68,7 @@ class SeriesViewHolder(itemView: View) :RecyclerView.ViewHolder(itemView){
                 .load(sery.coverAsset.url)
                 .diskCacheStrategy(DiskCacheStrategy.DATA)
                 .error(R.drawable.series_mage_error)
+                .fitCenter()
                 .listener(object : RequestListener<Drawable> {
                     override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
                         shimmer.hideShimmer()

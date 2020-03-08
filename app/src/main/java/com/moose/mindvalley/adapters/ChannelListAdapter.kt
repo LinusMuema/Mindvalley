@@ -67,7 +67,7 @@ class ChannelsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
 
         //Handle null icons
         if (channel.iconAsset == null || channel.iconAsset!!.thumbnailUrl.isNullOrEmpty()){
-            Glide.with(itemView.context).load(R.drawable.image_error)
+            Glide.with(itemView.context).load(R.drawable.image_error).fitCenter()
                 .listener(object : RequestListener<Drawable> {
                 override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
                     shimmer.hideShimmer()
@@ -87,6 +87,7 @@ class ChannelsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
                 .load(channel.iconAsset!!.thumbnailUrl)
                 .diskCacheStrategy(DiskCacheStrategy.DATA)
                 .error(R.drawable.image_error)
+                .fitCenter()
                 .listener(object : RequestListener<Drawable> {
                     override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
                         shimmer.hideShimmer()

@@ -40,10 +40,16 @@ class MainActivity : AppCompatActivity() {
                     or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
         }
 
+        //Observe the swiperefresh layout
+        swipe_refresh.setOnRefreshListener {
+            getDbData()
+        }
+
         //Observe episodes LiveData
         viewModel.episodes.observe(this, Observer {
             if (it.isNotEmpty()){
                 val episodes = Gson().fromJson(it[0].episodes, Episodes::class.java)
+                swipe_refresh.isRefreshing = false
                 episodes_recycler.apply {
                     setHasFixedSize(true)
                     layoutManager = LinearLayoutManager(this@MainActivity, LinearLayoutManager.HORIZONTAL, false)
@@ -55,6 +61,7 @@ class MainActivity : AppCompatActivity() {
         //Observe channels LiveData
         viewModel.channels.observe(this, Observer {
             if (it.isNotEmpty()) {
+                swipe_refresh.isRefreshing = false
                 val channels = Gson().fromJson(it[0].channels, Channels::class.java)
                 channels_recycler.apply {
                     setHasFixedSize(true)
@@ -67,6 +74,7 @@ class MainActivity : AppCompatActivity() {
         //Observe categories LiveData
         viewModel.categories.observe(this, Observer {
             if (it.isNotEmpty()) {
+                swipe_refresh.isRefreshing = false
                 val categories = Gson().fromJson(it[0].categories, Categories::class.java)
                 categories_recycler.apply {
                     setHasFixedSize(true)
@@ -75,8 +83,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
-
-        //Get data from the database
         getDbData()
     }
 
@@ -86,8 +92,6 @@ class MainActivity : AppCompatActivity() {
         viewModel.getCategories()
         if (connectionAvailable())
             getNetworkData()
-        else
-            Log.d("room_network", "Network not Available")
     }
 
     private fun getNetworkData() {

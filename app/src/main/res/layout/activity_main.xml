@@ -1,99 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="30dp"
-    tools:context=".ui.MainActivity">
+    android:id="@+id/swipe_refresh"
+    tools:context=".ui.MainActivity"
+    android:layout_marginTop="30dp">
 
-        <LinearLayout
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/activity_title"
-                    android:textColor="#C1C1C1"
-                    android:fontFamily="@font/gilroy_bold"
-                    android:textSize="30sp" />
+            android:layout_height="match_parent">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
                     android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/episodes_title"
+                            android:id="@+id/title"
                             android:layout_width="wrap_content"
-                            android:layout_height="25dp"
-                            android:layout_marginTop="30dp"
-                            android:textColor="#95989D"
-                            android:textSize="20sp"
-                            android:text="@string/episodes_title" />
+                            android:layout_height="wrap_content"
+                            android:text="@string/activity_title"
+                            android:textColor="#C1C1C1"
+                            android:fontFamily="@font/gilroy_bold"
+                            android:textSize="30sp" />
 
-                        <androidx.recyclerview.widget.RecyclerView
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="15dp"
-                            android:id="@+id/episodes_recycler"/>
+                            android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/episodes_title"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="25dp"
+                                    android:layout_marginTop="30dp"
+                                    android:textColor="#95989D"
+                                    android:textSize="20sp"
+                                    android:text="@string/episodes_title" />
+
+                                <androidx.recyclerview.widget.RecyclerView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="15dp"
+                                    android:id="@+id/episodes_recycler"/>
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_margin="10dp"
+                            android:background="#3C434E" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/channels_title"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="30dp"
+                                    android:textColor="#95989D"
+                                    android:textSize="20sp"
+                                    android:text="@string/channels_title" />
+
+                                <androidx.recyclerview.widget.RecyclerView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="15dp"
+                                    android:id="@+id/channels_recycler"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/categories_title"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="30dp"
+                                    android:textColor="#95989D"
+                                    android:textSize="20sp"
+                                    android:text="@string/categories_title" />
+
+                                <androidx.recyclerview.widget.RecyclerView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="15dp"
+                                    android:id="@+id/categories_recycler"/>
+
+                        </LinearLayout>
 
                 </LinearLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_margin="10dp"
-                    android:background="#3C434E" />
+        </androidx.core.widget.NestedScrollView>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/channels_title"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="30dp"
-                            android:textColor="#95989D"
-                            android:textSize="20sp"
-                            android:text="@string/channels_title" />
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="15dp"
-                            android:id="@+id/channels_recycler"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/categories_title"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="30dp"
-                            android:textColor="#95989D"
-                            android:textSize="20sp"
-                            android:text="@string/categories_title" />
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="15dp"
-                            android:id="@+id/categories_recycler"/>
-
-                </LinearLayout>
-
-        </LinearLayout>
-
-</androidx.core.widget.NestedScrollView>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

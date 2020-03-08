@@ -47,8 +47,8 @@ class CourseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         else
             title.text = course.title
 
-        if (course.coverAsset == null || course.coverAsset.url.isNullOrEmpty()){
-            Glide.with(itemView.context).load(R.drawable.image_error)
+        if (course.coverAsset.url.isEmpty()){
+            Glide.with(itemView.context).load(R.drawable.image_error).fitCenter()
                 .listener(object : RequestListener<Drawable> {
                     override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
                         shimmer.hideShimmer()
@@ -68,6 +68,7 @@ class CourseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
                 .load(course.coverAsset.url)
                 .diskCacheStrategy(DiskCacheStrategy.DATA)
                 .error(R.drawable.image_error)
+                .fitCenter()
                 .listener(object : RequestListener<Drawable> {
                     override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
                         shimmer.hideShimmer()
