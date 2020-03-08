@@ -1,4 +1,4 @@
-# ![Logo](https://raw.githubusercontent.com/LinusMuema/Mindvalley/master/app/src/main/ic_launcher-playstore.png =20x20)Mindvalley Android Challenge
+# ![Logo](https://raw.githubusercontent.com/LinusMuema/Mindvalley/master/app/src/main/res/drawable/logo.png)   Mindvalley Android Challenge
 * Android application to display the channels section.
 
 ## Contributors
