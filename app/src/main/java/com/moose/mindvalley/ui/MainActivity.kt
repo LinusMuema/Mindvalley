@@ -45,8 +45,12 @@ class MainActivity : AppCompatActivity() {
             getDbData()
         }
 
+        getDbData()
+    }
+
+    private fun getDbData() {
         //Observe episodes LiveData
-        viewModel.episodes.observe(this, Observer {
+        viewModel.getEpisodes().observe(this, Observer {
             if (it.isNotEmpty()){
                 val episodes = Gson().fromJson(it[0].episodes, Episodes::class.java)
                 swipe_refresh.isRefreshing = false
@@ -59,7 +63,7 @@ class MainActivity : AppCompatActivity() {
         })
 
         //Observe channels LiveData
-        viewModel.channels.observe(this, Observer {
+        viewModel.getChannels().observe(this, Observer {
             if (it.isNotEmpty()) {
                 swipe_refresh.isRefreshing = false
                 val channels = Gson().fromJson(it[0].channels, Channels::class.java)
@@ -72,7 +76,7 @@ class MainActivity : AppCompatActivity() {
         })
 
         //Observe categories LiveData
-        viewModel.categories.observe(this, Observer {
+        viewModel.getCategories().observe(this, Observer {
             if (it.isNotEmpty()) {
                 swipe_refresh.isRefreshing = false
                 val categories = Gson().fromJson(it[0].categories, Categories::class.java)
@@ -83,13 +87,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
-        getDbData()
-    }
-
-    private fun getDbData() {
-        viewModel.getEpisodes()
-        viewModel.getChannels()
-        viewModel.getCategories()
         if (connectionAvailable())
             getNetworkData()
     }

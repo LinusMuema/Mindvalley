@@ -1,5 +1,6 @@
 package com.moose.mindvalley.viewmodels
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.moose.mindvalley.models.*
 import com.moose.mindvalley.network.MindvalleyEndpoints
@@ -16,18 +17,22 @@ class MainActivityViewModel(
     private val retrofit: MindvalleyEndpoints
 ): ViewModel() {
 
-    val episodes = repository.episodes
-    val channels = repository.channels
-    val categories = repository.categories
+
 
     //Get episodes from DB
-    fun getEpisodes(){ repository.getEpisodes() }
+    fun getEpisodes(): MutableLiveData<List<DbEpisodes>> {
+        return repository.getEpisodes()
+    }
 
     //Get channels from DB
-    fun getChannels(){ repository.getChannels() }
+    fun getChannels(): MutableLiveData<List<DbChannels>> {
+        return repository.getChannels()
+    }
 
     //Get categories from DB
-    fun getCategories(){ repository.getCategories() }
+    fun getCategories(): MutableLiveData<List<DbCategories>> {
+        return repository.getCategories()
+    }
 
     //Get the Latest episodes form api
     fun getNetworkEpisodes() {
