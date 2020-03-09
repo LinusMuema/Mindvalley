@@ -1,4 +1,8 @@
-# ![Logo](https://raw.githubusercontent.com/LinusMuema/Mindvalley/master/app/src/main/res/drawable/logo.png)   Mindvalley Android Challenge
+<p align="center">
+  <img src="https://raw.githubusercontent.com/LinusMuema/Mindvalley/master/app/src/main/res/drawable/logo.png">
+</p>
+   
+# Mindvalley Android Challenge
 * Android application to display the channels section.
 
 ## Contributors
@@ -15,6 +19,9 @@
 
 ### 2. Adding RxJava to Room
 * Using LiveData to observe data in the database proved not be as efficient therefore I opted to add RxJava to Room functions within the DAO and this was new to me.
+
+### 3. The Figma color codes
+* The color code for the background in [Figma](https://www.figma.com/file/EjpKhZjcmTwAkrVRUKIK2p/Channels) is different from the actual color presented in the app hence the application background color becomes different.
 
 
 ## Improvement suggestions

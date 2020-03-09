@@ -11,7 +11,10 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.moose.mindvalley.R
@@ -47,8 +50,10 @@ class CourseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         else
             title.text = course.title
 
+        val requestOptions = RequestOptions().transforms(CenterCrop(), RoundedCorners(16))
+
         if (course.coverAsset.url.isEmpty()){
-            Glide.with(itemView.context).load(R.drawable.image_error).fitCenter()
+            Glide.with(itemView.context).load(R.drawable.image_error).centerCrop().apply(requestOptions)
                 .listener(object : RequestListener<Drawable> {
                     override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
                         shimmer.hideShimmer()
@@ -68,7 +73,8 @@ class CourseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
                 .load(course.coverAsset.url)
                 .diskCacheStrategy(DiskCacheStrategy.DATA)
                 .error(R.drawable.image_error)
-                .fitCenter()
+                .centerCrop()
+                .apply(requestOptions)
                 .listener(object : RequestListener<Drawable> {
                     override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
                         shimmer.hideShimmer()

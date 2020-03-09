@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:id="@+id/swipe_refresh"
     tools:context=".ui.MainActivity"
+    android:background="#23272F"
     android:layout_marginTop="30dp">
 
         <androidx.core.widget.NestedScrollView
@@ -60,14 +61,7 @@
                             android:layout_height="wrap_content"
                             android:orientation="vertical">
 
-                                <TextView
-                                    android:id="@+id/channels_title"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="30dp"
-                                    android:textColor="#95989D"
-                                    android:textSize="20sp"
-                                    android:text="@string/channels_title" />
+
 
                                 <androidx.recyclerview.widget.RecyclerView
                                     android:layout_width="match_parent"

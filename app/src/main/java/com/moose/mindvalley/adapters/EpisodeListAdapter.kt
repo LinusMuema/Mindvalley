@@ -11,7 +11,10 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.moose.mindvalley.R
@@ -50,10 +53,13 @@ class EpisodesViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         else
             channel.text = "Channel not available"
 
+        val requestOptions = RequestOptions().transforms(CenterCrop(), RoundedCorners(16))
+
         Glide.with(itemView.context)
             .load(media.coverAsset.url)
             .diskCacheStrategy(DiskCacheStrategy.DATA)
             .error(R.drawable.image_error)
+            .apply(requestOptions)
             .listener(object : RequestListener<Drawable>{
                 override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
                     shimmer.hideShimmer()

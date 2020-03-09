@@ -12,7 +12,10 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.RequestOptions.circleCropTransform
 import com.bumptech.glide.request.target.Target
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.moose.mindvalley.R
@@ -67,7 +70,7 @@ class ChannelsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
 
         //Handle null icons
         if (channel.iconAsset == null || channel.iconAsset!!.thumbnailUrl.isNullOrEmpty()){
-            Glide.with(itemView.context).load(R.drawable.image_error).fitCenter()
+            Glide.with(itemView.context).load(R.drawable.image_error).centerCrop().apply(circleCropTransform())
                 .listener(object : RequestListener<Drawable> {
                 override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
                     shimmer.hideShimmer()
@@ -87,7 +90,8 @@ class ChannelsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
                 .load(channel.iconAsset!!.thumbnailUrl)
                 .diskCacheStrategy(DiskCacheStrategy.DATA)
                 .error(R.drawable.image_error)
-                .fitCenter()
+                .centerCrop()
+                .apply(circleCropTransform())
                 .listener(object : RequestListener<Drawable> {
                     override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
                         shimmer.hideShimmer()

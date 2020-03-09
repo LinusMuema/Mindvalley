@@ -8,9 +8,9 @@
 
     <com.facebook.shimmer.ShimmerFrameLayout
         android:id="@+id/image_shimmer"
-        android:background="#000000"
+        android:background="@drawable/image_rectangle"
         android:layout_marginBottom="10dp"
-        android:layout_width="228dp"
+        android:layout_width="152dp"
         android:layout_height="228dp">
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -25,6 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/gilroy_medium"
+        android:textColor="#ffffff"
         android:textSize="17sp"
         android:lineSpacingExtra="1sp"
         android:translationY="-0.48sp"

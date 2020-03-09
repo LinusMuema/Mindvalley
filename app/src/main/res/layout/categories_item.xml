@@ -9,12 +9,15 @@
     android:layout_marginBottom="16dp">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="134dp"
         android:layout_height="wrap_content"
         android:id="@+id/category_title"
+        android:textColor="#ffffff"
         android:layout_centerVertical="true"
+        android:gravity="center"
+        android:letterSpacing="0.01"
         android:layout_centerHorizontal="true"
-        android:fontFamily="@font/gilroy_medium"
+        android:fontFamily="@font/gilroy_bold"
         android:textSize="18sp"
         android:textAllCaps="false" />
 
